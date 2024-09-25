@@ -26,14 +26,29 @@ let menuArray = [
 ];
 
 
+
+
 const menuBodegon = document.querySelector("#menu-container");
+const menuVacio = document.querySelector("#menu-vacio");
+
+function actualizarMenu () {
+    if (menuArray.length === 0) {
+        menuVacio.classList.remove("d-none");
+        menuBodegon.classList.add("d-none");
+    } else {
+        menuVacio.classList.add("d-none");
+        menuBodegon.classList.remove("d-none");
+
+
+    }
+}
 
 function mostrarMenu (menuArray) {
     menuBodegon.innerHTML = '';
 
     menuArray.forEach((producto) => {
-    let div = document.createElement("div");
-    div.classList.add("menu-product");
+        let div = document.createElement("div");
+        div.classList.add("menu-product");
  
     div.innerHTML = `
             <h3>${producto.nombre}</h3>
@@ -45,14 +60,32 @@ function mostrarMenu (menuArray) {
         button.innerText = "✖";
  
         button.addEventListener("click", () => {
-          console.log(producto)
+          eliminarProducto(producto)
         })
  
         div.append(button)
         menuBodegon.append(div)
  
     });
+
+    actualizarMenu ();
 }
+
+/**************************** Eliminar producto del menu *********************************/
+
+function eliminarProducto (productoEliminado) {
+    const confirmacion = confirm(`¿Estás seguro que deseas eliminar el producto: "${productoEliminado.nombre}"?`);
+    if (confirmacion) {
+        menuArray = menuArray.filter((producto) => producto !== productoEliminado);
+    }
+    mostrarMenu(menuArray);
+}
+
+actualizarMenu ();
+
+
+
+/**************************** Filtrar por categoria *****************************************/
 
 let menuCompleto = document.querySelector("#menu");
 menuCompleto.addEventListener("click",() => {
@@ -88,10 +121,11 @@ function filtrarCategoria(categoria) {
     if (categoria === 'menu') {
         mostrarMenu(menuArray); 
     } else {
-        const productosFiltrados = menuArray.filter(producto => producto.categoria === categoria);
+        const productosFiltrados = menuArray.filter((producto) => producto.categoria === categoria);
         mostrarMenu(productosFiltrados); 
     }
 }
 
 mostrarMenu(menuArray);
+actualizarMenu ();
 

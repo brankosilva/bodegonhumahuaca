@@ -51,6 +51,9 @@ img {
     --ff-text: "Poppins", sans-serif;
 }
 
+.d-none {
+    display: none;
+}
 
 
 /************************************** MAIN **************************************************/
@@ -70,6 +73,7 @@ img {
     font-family: var(--ff-title);
     color: var(--clr-bg-90);
     margin-bottom: 1rem;
+    text-align: center;
 }
 
 .papas {
@@ -145,6 +149,14 @@ img {
 
 .container-menu {
     margin-inline: 10rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-vacio {
+    text-align: center;
+    color: var(--clr-bg-90);
+    font-family: var(--ff-text);
 }
 
 .menu {
@@ -276,10 +288,39 @@ input[type="number"] {
 
 /************************************** Media queries **************************************************/
 
-@media screen and (min-width: 700px) {
+@media screen and (max-width: 865px) {
+
+    .container-menu {
+        margin-inline: 7rem;
+    }
 
 
+}
+
+@media screen and (max-width: 650px) {
+
+    .container-menu {
+        margin-inline: 5rem;
+    }
 
 
+    .title-menu {
+        font-size: 1.5rem;
+
+    }
+
+    .papas {
+        font-size: 1.5rem;
+    }
+
+
+}
+
+
+@media screen and (max-width: 450px) {
+
+    .container-menu {
+        margin-inline: 2rem;
+    }
 
 }
