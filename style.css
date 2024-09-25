@@ -48,7 +48,7 @@ img {
     --clr-gray-alt: #2d2d2d;
     --clr-details: #ca3c31;
     --ff-title: 'Unbounded', sans-serif;
-    --ff-text: 'Saira', sans-serif;
+    --ff-text: "Poppins", sans-serif;
 }
 
 
@@ -140,6 +140,40 @@ img {
     scale: 1.1;
 }
 
+
+/************************************** menu productos **********************************************/
+
+.container-menu {
+    margin-inline: 10rem;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: .1rem;
+    flex-wrap: wrap;
+
+}
+
+.menu-product {
+    display: grid;
+    grid-template-columns: 2fr 0.3fr 0.1fr;
+    align-items: flex-start;
+    gap: .5rem;
+    background-color: var(--clr-text);
+    padding: .5rem 1rem;
+    color: var(--clr-bg);
+    font-family: var(--ff-text);
+    font-size: .8rem;
+}
+
+.eliminate-product-btn {
+    border: 0;
+    background-color: var(--clr-text);
+    color: var(--clr-bg);
+    cursor: pointer;
+}
 
 
 /************************************** agregar o quitar productos **********************************************/
