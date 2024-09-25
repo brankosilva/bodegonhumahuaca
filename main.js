@@ -1,5 +1,5 @@
 
-/**************************** color-mode *****************************************/
+/**************************** color-mode ***********************************************************/
 
 let botonColorMode = document.querySelector("#color-mode");
 
@@ -13,7 +13,18 @@ botonColorMode.addEventListener("click", () => {
      }
 })
 
-/**************************** menu *****************************************/
+/**************************** menu **************************************************************/
+
+function guardarEnLocalStorage() {
+    localStorage.setItem('menu', JSON.stringify(menuArray));
+}
+
+function cargarMenuLocalStorage() {
+    const menuGuardado = localStorage.getItem('menu');
+    if (menuGuardado) {
+        menuArray = JSON.parse(menuGuardado);
+    }
+}
 
 let menuArray = [
    { nombre: "Bastones de muzzarella", precio: 4000, categoria: "entradas" },
@@ -26,8 +37,6 @@ let menuArray = [
 ];
 
 
-
-
 const menuBodegon = document.querySelector("#menu-container");
 const menuVacio = document.querySelector("#menu-vacio");
 
@@ -38,19 +47,20 @@ function actualizarMenu () {
     } else {
         menuVacio.classList.add("d-none");
         menuBodegon.classList.remove("d-none");
-
-
     }
 }
 
+/**************************** creacion y recorrido menu **************************************************************/
+
+
 function mostrarMenu (menuArray) {
-    menuBodegon.innerHTML = '';
+    menuBodegon.innerHTML = "";
 
     menuArray.forEach((producto) => {
         let div = document.createElement("div");
         div.classList.add("menu-product");
  
-    div.innerHTML = `
+        div.innerHTML = `
             <h3>${producto.nombre}</h3>
             <p>$${producto.precio}</p>
         `;
@@ -71,21 +81,25 @@ function mostrarMenu (menuArray) {
     actualizarMenu ();
 }
 
+
+
 /**************************** Eliminar producto del menu *********************************/
 
 function eliminarProducto (productoEliminado) {
     const confirmacion = confirm(`¿Estás seguro que deseas eliminar el producto: "${productoEliminado.nombre}"?`);
     if (confirmacion) {
-        menuArray = menuArray.filter((producto) => producto !== productoEliminado);
+        let indice = menuArray.findIndex((producto) => producto === productoEliminado);
+        menuArray.splice(indice, 1);
+        guardarEnLocalStorage();
     }
+
+    actualizarMenu ();
     mostrarMenu(menuArray);
 }
 
-actualizarMenu ();
 
 
-
-/**************************** Filtrar por categoria *****************************************/
+/**************************** Filtrar por categoria **************************************************/
 
 let menuCompleto = document.querySelector("#menu");
 menuCompleto.addEventListener("click",() => {
@@ -118,14 +132,63 @@ menuPostres.addEventListener("click",() => {
 } )
 
 function filtrarCategoria(categoria) {
-    if (categoria === 'menu') {
+    if (categoria === "menu") {
         mostrarMenu(menuArray); 
     } else {
         const productosFiltrados = menuArray.filter((producto) => producto.categoria === categoria);
         mostrarMenu(productosFiltrados); 
     }
+
+    actualizarMenu ();
+
 }
 
+
+
+
+/********************************** Formulario carga menu **************************************************/
+
+const btnAddProduct = document.querySelector("#add-producto");
+const formAdministrationMenu = document.querySelector("#form-administration-menu");
+
+btnAddProduct.addEventListener("click", () => {
+    formAdministrationMenu.classList.toggle("d-none");
+});
+
+const formAddProduct = document.querySelector("#form-add-product");
+const inputProductName = document.querySelector("#product-name");
+const inputProductPrice = document.querySelector("#product-price");
+const selectProductCategory = document.querySelector("#product-category");
+
+formAddProduct.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const nuevoProducto = {
+        nombre: inputProductName.value,
+        precio: Number(inputProductPrice.value),
+        categoria: selectProductCategory.value
+    };
+
+    menuArray.push(nuevoProducto);
+
+    guardarEnLocalStorage();
+
+    mostrarMenu(menuArray);
+
+    formAddProduct.reset();
+
+  })
+
+
+
+
+
+
+
+
+cargarMenuLocalStorage();
 mostrarMenu(menuArray);
-actualizarMenu ();
+
+
+
 

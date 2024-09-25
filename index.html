@@ -22,6 +22,7 @@
     <main>
         
         <section id="content" class="header-menu container">
+
             <div><img class="logo" src="./img/logo.png" alt="logo"></div>
             <h2 id="title" class="title-menu"> <span class="papas">🍟</span> Bodegón Humahuaca <span class="papas">🍟</span> </h2>
 
@@ -32,41 +33,54 @@
                 <button id="bebidas" class="btn-category"> Bebidas </button>
                 <button id="tragos" class="btn-category"> Tragos </button>
                 <button id="postres" class="btn-category"> Postres </button>
-                
 
                 <button id="color-mode" class="btn-color-mode"> <i class="bi bi-brightness-high-fill"></i> </button>
             </div>
 
-        </section>
+            <div class="container-menu">
+                <div id="menu-vacio" class="menu-vacio">
+                    <h4>tu menú está vacio</h4>
+                </div>
+                <div class="menu" id="menu-container">
+                    <!---------------esto se va a rellenar con js --------------->
 
-        <section class="container container-menu">
-            <div id="menu-vacio" class="menu-vacio">
-                <h4>tu menú está vacio</h4>
-            </div>
-            <div class="menu" id="menu-container">
+                </div>
 
             </div>
-        </section>
+
 
         <section class="container">
+
             <div class="add-eliminate-product">
                 <button id="add-producto" class="btn-add-product"> agregar producto</button>
                 <button id="eliminate-menu" class="btn-eliminate-menu"> eliminar todo el menú</button>
-            </div>     
+            </div>  
+
         </section>
 
+
         <section class="container section-form">
-            <div id="form-administration-menu" class="form">
+            <div id="form-administration-menu" class="d-none form">
+
                 <h2>Agregar Producto</h2>
 
                 <form action="" id="form-add-product" class="add-product-form">
                     <input type="hidden" id="product-indice">
-                    <label>Producto: <input type="text" id="product-name" required></label><br>
-                    <label>Precio: <input type="number" id="product-price" required></label><br>
-                    <label>Categoría: <input type="text" id="product-category" required></label><br>
+                    <label>Producto: <input type="text" id="product-name" required></label>
+                    <label>Precio: <input type="number" id="product-price" required></label>
+                    <label>Categoría: <select id="product-category" required>
+                        <option value="" disabled selected>Selecciona una categoría</option>
+                        <option value="entradas">Entradas</option>
+                        <option value="principales">Principales</option>
+                        <option value="bebidas">Bebidas</option>
+                        <option value="tragos">Tragos</option>
+                        <option value="postres">Postres</option>
+                    </label>
+
                     <input type="submit" id="btn-save" class="btn-submit" value="Guardar">
                 </form>
             </div>
+
         </section>
 
 
