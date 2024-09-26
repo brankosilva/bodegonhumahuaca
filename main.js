@@ -83,22 +83,6 @@ function mostrarMenu (menuArray) {
 
 
 
-/**************************** Eliminar producto del menu *********************************/
-
-function eliminarProducto (productoEliminado) {
-    const confirmacion = confirm(`¿Estás seguro que deseas eliminar el producto: "${productoEliminado.nombre}"?`);
-    if (confirmacion) {
-        let indice = menuArray.findIndex((producto) => producto === productoEliminado);
-        menuArray.splice(indice, 1);
-        guardarEnLocalStorage();
-    }
-
-    actualizarMenu ();
-    mostrarMenu(menuArray);
-}
-
-
-
 /**************************** Filtrar por categoria **************************************************/
 
 let menuCompleto = document.querySelector("#menu");
@@ -145,20 +129,61 @@ function filtrarCategoria(categoria) {
 
 
 
+/**************************** Eliminar producto del menu *********************************/
+
+function eliminarProducto (productoEliminado) {
+    const confirmacion = confirm(`¿Estás seguro que deseas eliminar el producto: "${productoEliminado.nombre}"?`);
+    if (confirmacion) {
+        let indice = menuArray.findIndex((producto) => producto === productoEliminado);
+        menuArray.splice(indice, 1);
+        guardarEnLocalStorage();
+    }
+
+    actualizarMenu ();
+    mostrarMenu(menuArray);
+}
+
+
+
+/**************************** Eliminar TODOS los producto del menu *********************************/
+
+const BtnEliminarProducto = document.querySelector("#eliminate-menu");
+
+BtnEliminarProducto.addEventListener("click", () => {
+    const confirmacion = confirm("¿Estás seguro que deseas eliminar todo el menú? Esta acción no se puede deshacer.");
+    
+    if (confirmacion) {
+        menuArray = [];
+    }
+
+    guardarEnLocalStorage();
+
+    actualizarMenu ();
+    mostrarMenu(menuArray);
+});
+
+
+
 
 /********************************** Formulario carga menu **************************************************/
 
-const btnAddProduct = document.querySelector("#add-producto");
-const formAdministrationMenu = document.querySelector("#form-administration-menu");
+const btnAgregarProducto = document.querySelector("#add-producto");
+const formAdministracionMenu = document.querySelector("#form-administration-menu");
 
-btnAddProduct.addEventListener("click", () => {
-    formAdministrationMenu.classList.toggle("d-none");
+btnAgregarProducto.addEventListener("click", () => {
+    formAdministracionMenu.classList.toggle("d-none");
 });
 
 const formAddProduct = document.querySelector("#form-add-product");
 const inputProductName = document.querySelector("#product-name");
 const inputProductPrice = document.querySelector("#product-price");
 const selectProductCategory = document.querySelector("#product-category");
+const btnClose = document.querySelector("#btn-close");
+
+btnClose.addEventListener("click", () => {
+    formAdministracionMenu.classList.add("d-none")
+
+});
 
 formAddProduct.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -178,12 +203,6 @@ formAddProduct.addEventListener("submit", (e) => {
     formAddProduct.reset();
 
   })
-
-
-
-
-
-
 
 
 cargarMenuLocalStorage();

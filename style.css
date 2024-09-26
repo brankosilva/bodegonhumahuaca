@@ -110,7 +110,7 @@ img {
     display: flex;
     align-items:center;
     justify-content: space-between;
-    gap: 2rem;
+    gap: .5rem 1rem;
     flex-wrap: wrap;
     border-bottom: 1px solid var(--clr-details);
     margin-bottom: 1rem;
@@ -219,32 +219,27 @@ img {
 .form {
     background-color: var(--clr-details);
     border-radius: 0.8rem;
-    display: flex;
-    flex-direction: column;
     padding: 2rem;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
     max-width: 24rem;
     box-shadow: 0 4px 8px rgba(201, 10, 10, 0.1);
 }
 
 .form h2 {
     font-family: var(--ff-title);
+    padding-bottom: 1rem;
+    text-align: center;
 }
 
 .add-product-form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: start;
-    flex-wrap: wrap;
 }
+
 
 input[type="text"],
 input[type="number"],
 select {
-    width: 100%;    
+    max-width: 100%;    
     padding: 0.5rem;
     margin-bottom: 1rem;
     border: 1px solid #ccc;
@@ -255,9 +250,12 @@ select {
 .form label {
     font-family: var(--ff-text);
     font-weight: 600;
+    display: flex;
+    flex-direction: column;
 }
 
-.btn-submit {
+.btn-submit,
+.btn-close {
     padding: 0.5rem 1.2rem;
     border-radius: 1rem;
     border: 1px solid var(--clr-details);
@@ -268,13 +266,14 @@ select {
     background-color: var(--clr-text);
     transition: .3s;
     margin-bottom: .5rem;
-    cursor: pointer;
-    display: block; 
+    cursor: pointer; 
     margin: 0 auto;
+    min-width: 6rem;
 
 }
 
-.btn-submit:hover {
+.btn-submit:hover,
+.btn-close:hover {
     background-color: var(--clr-bg);
     color: var(--clr-details);
 }
@@ -282,20 +281,28 @@ select {
 
 /************************************** Media queries **************************************************/
 
-@media screen and (max-width: 865px) {
+@media screen and (max-width: 800px) {
 
-    .container-menu {
-        margin-inline: 7rem;
+
+}
+
+@media screen and (max-width: 652px) {
+
+
+
+    .title-menu {
+        font-size: 1.8rem;
+
+    }
+
+    .papas {
+        font-size: 1.8rem;
     }
 
 }
 
-@media screen and (max-width: 650px) {
 
-    .container-menu {
-        margin-inline: 5rem;
-    }
-
+@media screen and (max-width: 564px) {
 
     .title-menu {
         font-size: 1.5rem;
@@ -306,17 +313,87 @@ select {
         font-size: 1.5rem;
     }
 
+    .menu-product {
+        gap: 5rem;
+    }
 
+    .menu-product h3 {
+        font-size: .8rem;
+    }
+
+    .form {
+        padding: 1.5rem;
+    }
+
+    .form h2 {
+        font-size: 1.3rem;
+    }
+
+    .form label {
+        font-size: .9rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        padding: 0.3rem;
+        font-size: .7rem;
+    }
+
+    .btn-submit, .btn-close {
+        padding: 0.4rem 1.1rem;
+        font-size: 0.7rem;
+    }
 }
 
+@media screen and (max-width: 482px) {
 
-@media screen and (max-width: 450px) {
+    .title-menu {
+        font-size: 1.2rem;
 
-    .container-menu {
-        margin-inline: 2rem;
+    }
+
+    .papas {
+        font-size: 1.5rem;
+    }
+
+    .menu-product {
+        gap: 2rem;
+    }
+
+    .form {
+        padding: 1.3rem;
+    }
+
+    .form h2 {
+        font-size: 1.2rem;
+    }
+
+    .btn-add-product, .btn-eliminate-menu {
+        padding: 0.5rem 1.1rem;
+        font-size: 0.7rem;
+    }
+}
+
+@media screen and (max-width: 415px) {
+
+    .title-menu {
+        font-size: 1.2rem;
+
+    }
+
+    .papas {
+        font-size: 1.3rem;
+    }
+
+    .menu-product {
+        gap: 1.5rem;
     }
 
 }
+
+
+
 
 
 .d-none {
