@@ -17,15 +17,18 @@ botonColorMode.addEventListener("click", () => {
 
 /**************************** menu **************************************************************/
 
-let menuArray = [
-    { nombre: "Bastones de muzzarella", precio: 4000, categoria: "entradas" },
-    { nombre: "Pizza Napolitana", precio: 6500, categoria: "principales" },
-    { nombre: "Hamburguesa", precio: 8000, categoria: "principales" },
-    { nombre: "Coca-cola", precio: 3000, categoria: "bebidas" },
-    { nombre: "Fernet", precio: 3000, categoria: "tragos" },
-    { nombre: "Tiramisú", precio: 3200, categoria: "postres" },
-    { nombre: "Flan con ddl", precio: 3800, categoria: "postres" }
- ];
+let menuArray = [];
+
+function cargarMenuDesdeJSON() {
+    fetch("./menu.json")
+    .then(response => response.json())
+    .then(data => {
+        menuArray = data; 
+        guardarEnLocalStorage();
+        mostrarMenu(menuArray);
+    })
+    .catch(error => console.error('Error al cargar el archivo JSON:', error));
+}
 
 
 function guardarEnLocalStorage() {
@@ -35,7 +38,10 @@ function guardarEnLocalStorage() {
 function cargarMenuLocalStorage() {
     const menuGuardado = localStorage.getItem('menu');
     if (menuGuardado) {
-        menuArray = JSON.parse(menuGuardado) || [] ;
+        menuArray = JSON.parse(menuGuardado);
+        mostrarMenu(menuArray);
+    } else {
+        cargarMenuDesdeJSON();
     }
 }
 
@@ -228,21 +234,12 @@ const inputProductName = document.querySelector("#product-name");
 const inputProductPrice = document.querySelector("#product-price");
 const selectProductCategory = document.querySelector("#product-category");
 const btnClose = document.querySelector("#btn-close");
-const btnSave = document.querySelector("#btn-save");
 
 btnClose.addEventListener("click", () => {
     formAdministracionMenu.classList.add("d-none")
 
 });
 
-btnSave.addEventListener("click", () => {
-    Toastify ({
-        text: "Producto agregado!",
-        duration: 2000,
-        close:true
-    }).showToast();
-
-});
 
 formAddProduct.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -253,6 +250,7 @@ formAddProduct.addEventListener("submit", (e) => {
         categoria: selectProductCategory.value
     };
 
+
     menuArray.push(nuevoProducto);
 
     guardarEnLocalStorage();
@@ -260,6 +258,12 @@ formAddProduct.addEventListener("submit", (e) => {
     mostrarMenu(menuArray);
 
     formAddProduct.reset();
+
+    Toastify ({
+        text: "Producto agregado!",
+        duration: 1500,
+        close:true
+    }).showToast();
 
   })
 
