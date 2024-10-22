@@ -4,16 +4,29 @@
 let botonColorMode = document.querySelector("#color-mode");
 
 botonColorMode.addEventListener("click", () => {
-    if (document.body.classList.contains("dark-mode")) {
-        document.body.classList.remove("dark-mode");
+    if (document.body.classList.contains("bright-mode")) {
+        document.body.classList.remove("bright-mode");
         botonColorMode.innerHTML = '<i class="bi bi-brightness-high-fill"></i>'
      } else {
-        document.body.classList.add("dark-mode");
+        document.body.classList.add("bright-mode");
         botonColorMode.innerHTML = '<i class="bi bi-moon-fill"></i>'
      }
 })
 
+
+
 /**************************** menu **************************************************************/
+
+let menuArray = [
+    { nombre: "Bastones de muzzarella", precio: 4000, categoria: "entradas" },
+    { nombre: "Pizza Napolitana", precio: 6500, categoria: "principales" },
+    { nombre: "Hamburguesa", precio: 8000, categoria: "principales" },
+    { nombre: "Coca-cola", precio: 3000, categoria: "bebidas" },
+    { nombre: "Fernet", precio: 3000, categoria: "tragos" },
+    { nombre: "Tiramisú", precio: 3200, categoria: "postres" },
+    { nombre: "Flan con ddl", precio: 3800, categoria: "postres" }
+ ];
+
 
 function guardarEnLocalStorage() {
     localStorage.setItem('menu', JSON.stringify(menuArray));
@@ -22,20 +35,9 @@ function guardarEnLocalStorage() {
 function cargarMenuLocalStorage() {
     const menuGuardado = localStorage.getItem('menu');
     if (menuGuardado) {
-        menuArray = JSON.parse(menuGuardado);
+        menuArray = JSON.parse(menuGuardado) || [] ;
     }
 }
-
-let menuArray = [
-   { nombre: "Bastones de muzzarella", precio: 4000, categoria: "entradas" },
-   { nombre: "Pizza Napolitana", precio: 6500, categoria: "principales" },
-   { nombre: "Hamburguesa", precio: 8000, categoria: "principales" },
-   { nombre: "Coca-cola", precio: 3000, categoria: "bebidas" },
-   { nombre: "Fernet", precio: 3000, categoria: "tragos" },
-   { nombre: "Tiramisú", precio: 3200, categoria: "postres" },
-   { nombre: "Flan con ddl", precio: 3800, categoria: "postres" }
-];
-
 
 const menuBodegon = document.querySelector("#menu-container");
 const menuVacio = document.querySelector("#menu-vacio");
@@ -49,6 +51,8 @@ function actualizarMenu () {
         menuBodegon.classList.remove("d-none");
     }
 }
+
+
 
 /**************************** creacion y recorrido menu **************************************************************/
 
@@ -131,23 +135,46 @@ function filtrarCategoria(categoria) {
 
 /**************************** Eliminar producto del menu *********************************/
 
+
 function eliminarProducto (productoEliminado) {
-    const confirmacion = confirm(`¿Estás seguro que deseas eliminar el producto: "${productoEliminado.nombre}"?`);
-    if (confirmacion) {
-        let indice = menuArray.findIndex((producto) => producto === productoEliminado);
-        menuArray.splice(indice, 1);
-        guardarEnLocalStorage();
-    }
+    
+    Swal.fire ({
+        text:`¿Estás seguro que deseas eliminar el producto ${productoEliminado.nombre} del menú?`,
+        icon: "warning",
+        showClosebutton: true,
+
+        showConfirmButton: true,
+        showCancelButton: true,
+
+        confirmButtonText: "Eliminar producto",
+        cancelButtonText: "Cancelar",
+
+        customClass: "popup-eliminate-product"
+
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+            let indice = menuArray.findIndex((producto) => producto === productoEliminado);
+            menuArray.splice(indice, 1);
+            guardarEnLocalStorage();
+            swal.fire ({
+                text: `El producto ${productoEliminado.nombre} fue eliminado.`,
+                icon: "success",
+                customClass: "popup-eliminate-product"
+            })
+            actualizarMenu ();
+            mostrarMenu(menuArray);
+        }
+    })
 
     actualizarMenu ();
     mostrarMenu(menuArray);
 }
 
 
-
 /**************************** Eliminar TODOS los producto del menu *********************************/
 
-const BtnEliminarProducto = document.querySelector("#eliminate-menu");
+/*const BtnEliminarProducto = document.querySelector("#eliminate-menu");
 
 BtnEliminarProducto.addEventListener("click", () => {
     const confirmacion = confirm("¿Estás seguro que deseas eliminar todo el menú? Esta acción no se puede deshacer.");
@@ -160,8 +187,45 @@ BtnEliminarProducto.addEventListener("click", () => {
 
     actualizarMenu ();
     mostrarMenu(menuArray);
-});
+});*/
 
+const BtnEliminarProducto = document.querySelector("#eliminate-menu");
+
+BtnEliminarProducto.addEventListener("click", () => {
+
+    Swal.fire ({
+        text:`¿Estás seguro que deseas eliminar todo el menú? Esta acción no se puede deshacer.`,
+        icon: "warning",
+        showClosebutton: true,
+
+        showConfirmButton: true,
+        showCancelButton: true,
+
+        confirmButtonText: "Eliminar menú",
+        cancelButtonText: "Cancelar",
+
+        customClass: "popup-eliminate-product"
+
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+            menuArray = [];
+            swal.fire ({
+                text: `El menú fue eliminado.`,
+                icon: "success",
+                customClass: "popup-eliminate-product"
+            })
+            guardarEnLocalStorage();
+            actualizarMenu ();
+            mostrarMenu(menuArray);
+        }
+     });
+
+        guardarEnLocalStorage();
+
+        actualizarMenu ();
+        mostrarMenu(menuArray);
+    })
 
 
 

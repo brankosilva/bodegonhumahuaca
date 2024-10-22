@@ -38,7 +38,7 @@ img {
 }
 
 
-.dark-mode {
+.bright-mode {
     --clr-bg: #1c1c1c;
     --clr-bg-90: #1c1c1ce6;
     --clr-text: #ececec;
@@ -278,6 +278,37 @@ select {
     color: var(--clr-details);
 }
 
+.popup-eliminate-product .swal2-warning {
+    border-color:var(--clr-bg);
+    color:var(--clr-bg);
+}
+
+.popup-eliminate-product {
+    background-color: var(--clr-details);
+    font-family: var(--ff-text);
+    color: var(--clr-text);
+}
+
+.popup-eliminate-product .swal2-html-container {
+    font-weight: 600;
+}
+
+
+
+.popup-eliminate-product .swal2-confirm, 
+.popup-eliminate-product .swal2-cancel {
+    background-color: var(--clr-text);
+    color: var(--clr-bg);
+    font-family: var(--ff-text);
+    transition: .3s;
+}
+
+.popup-eliminate-product .swal2-confirm:hover,
+.popup-eliminate-product .swal2-cancel:hover {
+    background-color: var(--clr-bg);
+    color: var(--clr-details);
+}
+
 
 /************************************** Media queries **************************************************/
 
@@ -391,8 +422,6 @@ select {
     }
 
 }
-
-
 
 
 
