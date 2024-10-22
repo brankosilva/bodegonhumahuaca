@@ -174,21 +174,6 @@ function eliminarProducto (productoEliminado) {
 
 /**************************** Eliminar TODOS los producto del menu *********************************/
 
-/*const BtnEliminarProducto = document.querySelector("#eliminate-menu");
-
-BtnEliminarProducto.addEventListener("click", () => {
-    const confirmacion = confirm("¿Estás seguro que deseas eliminar todo el menú? Esta acción no se puede deshacer.");
-    
-    if (confirmacion) {
-        menuArray = [];
-    }
-
-    guardarEnLocalStorage();
-
-    actualizarMenu ();
-    mostrarMenu(menuArray);
-});*/
-
 const BtnEliminarProducto = document.querySelector("#eliminate-menu");
 
 BtnEliminarProducto.addEventListener("click", () => {
@@ -243,9 +228,19 @@ const inputProductName = document.querySelector("#product-name");
 const inputProductPrice = document.querySelector("#product-price");
 const selectProductCategory = document.querySelector("#product-category");
 const btnClose = document.querySelector("#btn-close");
+const btnSave = document.querySelector("#btn-save");
 
 btnClose.addEventListener("click", () => {
     formAdministracionMenu.classList.add("d-none")
+
+});
+
+btnSave.addEventListener("click", () => {
+    Toastify ({
+        text: "Producto agregado!",
+        duration: 2000,
+        close:true
+    }).showToast();
 
 });
 
