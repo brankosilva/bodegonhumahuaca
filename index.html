@@ -41,6 +41,7 @@
             </div>
 
             <div class="container-menu">
+
                 <div id="menu-vacio" class="menu-vacio">
                     <h4>tu menú está vacio</h4>
                 </div>
@@ -50,6 +51,37 @@
                 </div>
 
             </div>
+        </section>
+
+
+        <section class="container section-form">
+            <div id="form-edit-product" class="d-none form">
+        
+                <h2>Editar Producto</h2>
+        
+                <form action="" id="form-edit-product-details" class="edit-product-form">
+                    <input type="hidden" id="edit-product-indice">
+        
+                    <label>Producto: <input type="text" id="edit-product-name" required></label>
+        
+                    <label>Precio: <input type="number" id="edit-product-price" required></label>
+        
+                    <label> Categoría: 
+                        <select id="edit-product-category" required>
+                            <option value="" disabled selected>Selecciona una categoría</option>
+                            <option value="entradas">Entradas</option>
+                            <option value="principales">Principales</option>
+                            <option value="bebidas">Bebidas</option>
+                            <option value="tragos">Tragos</option>
+                            <option value="postres">Postres</option>
+                        </select>
+                    </label>
+        
+                    <input type="submit" id="btn-edit-save" class="btn-submit" value="Guardar Cambios">
+                    <input type="button" id="btn-edit-close" class="btn-close" value="Cerrar">
+                </form>
+            </div>
+        </section>
 
 
         <section class="container">
@@ -74,7 +106,7 @@
 
                     <label>Precio: <input type="number" id="product-price" required></label>
 
-                    <label>Categoría: 
+                    <label> Categoría: 
                         <select id="product-category" required>
                         <option value="" disabled selected>Selecciona una categoría</option>
                         <option value="entradas">Entradas</option>
@@ -91,7 +123,6 @@
             </div>
 
         </section>
-
 
     </main>
 

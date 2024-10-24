@@ -161,10 +161,10 @@ img {
 
 .menu-product {
     display: grid;
-    grid-template-columns: 2fr 1fr .3fr;
+    grid-template-columns: 15fr 15fr .3fr .3fr;
     justify-content: flex-end;
     align-items: center;
-    gap: 8rem;
+    gap: 2rem;
     background-color: var(--clr-text);
     padding: .5rem 1rem;
     color: var(--clr-bg-90);
@@ -172,7 +172,14 @@ img {
     font-size: .8rem;
 }
 
-.eliminate-product-btn {
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; 
+}
+
+.eliminate-product-btn,
+.edit-product-btn {
     border: 0;
     background-color: var(--clr-text);
     color: var(--clr-bg);
@@ -353,10 +360,6 @@ select {
         font-size: 1.5rem;
     }
 
-    .menu-product {
-        gap: 5rem;
-    }
-
     .menu-product h3 {
         font-size: .8rem;
     }
@@ -395,10 +398,6 @@ select {
 
     .papas {
         font-size: 1.5rem;
-    }
-
-    .menu-product {
-        gap: 2rem;
     }
 
     .form {
